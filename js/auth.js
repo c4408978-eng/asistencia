@@ -75,8 +75,8 @@ async function initAuth() {
 function validateLogin(pin) {
   const players = window._players || [];
   const technicians = window._technicians || [];
-  return technicians.find(t => t.pin === pin)
-    || players.find(p => p.pin === pin)
+  return technicians.find(t => String(t.pin).trim() === String(pin).trim())
+    || players.find(p => String(p.pin).trim() === String(pin).trim())
     || null;
 }
 
