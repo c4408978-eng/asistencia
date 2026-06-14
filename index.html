@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Confirmación de Asistencia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- ── LOGIN ── -->
+  <div id="screen-login" class="screen active">
+    <div class="login-wrap">
+      <div class="login-badge">⚽</div>
+      <h1 class="login-title">Mi Equipo</h1>
+      <p class="login-sub hidden">Introduce tu PIN para confirmar asistencia</p>
+
+      <div class="form-group">
+        <label for="input-pin" class="hidden">PIN personal</label>
+        <input id="input-pin" type="password" inputmode="numeric" placeholder="••••" />
+      </div>
+
+      <p id="login-error" class="error-msg hidden">PIN incorrecto. Inténtalo de nuevo.</p>
+
+      <button id="btn-login" class="btn-primary">Acceder</button>
+    </div>
+  </div>
+
+  <!-- ── DASHBOARD ── -->
+  <div id="screen-dashboard" class="screen hidden">
+
+    <header class="top-bar">
+      <span id="header-name" class="header-name"></span>
+      <button id="btn-logout" class="btn-logout" title="Cerrar sesión">Salir</button>
+    </header>
+
+    <main class="dashboard">
+      <h2 class="section-title">Próximos eventos</h2>
+      <p id="events-status" class="status-msg">Cargando eventos…</p>
+      <div id="events-list" class="events-list"></div>
+    </main>
+
+  </div>
+
+  <!-- ── TÉCNICO ── -->
+  <div id="screen-technician" class="screen hidden">
+
+    <header class="top-bar">
+      <span id="header-name-technician" class="header-name"></span>
+      <button id="btn-logout-technician" class="btn-logout" title="Cerrar sesión">Salir</button>
+    </header>
+
+    <main class="technician-dashboard">
+      <section class="technician-section technician-section--training" data-type="Entrenamiento">
+        <div class="technician-section-header">
+          <h2 class="technician-section-title">Entrenamiento</h2>
+        </div>
+        <div class="calendar-card" id="calendar-training"></div>
+        <div class="technician-events-panel">
+          <h3 class="technician-events-title">Eventos creados</h3>
+          <div id="technician-events-training" class="technician-events-list"></div>
+        </div>
+        <div class="event-form hidden" id="form-training">
+          <label class="event-form-label" for="time-entrenamiento">Hora</label>
+          <input id="time-entrenamiento" class="technician-input" type="time" />
+
+          <label class="event-form-label" for="location-training">Lugar</label>
+          <input id="location-training" class="technician-input" type="text" placeholder="Ej: Campo principal" />
+
+          <label class="event-form-label" for="notes-training">Notas</label>
+          <textarea id="notes-training" class="technician-textarea" rows="3" placeholder="Añade detalles opcionales"></textarea>
+          <button class="btn-technician-section-save" type="button" data-save-type="training">Guardar</button>
+          <p id="error-training" class="technician-error hidden">Selecciona una fecha primero</p>
+        </div>
+      </section>
+
+      <section class="technician-section technician-section--match" data-type="Partido">
+        <div class="technician-section-header">
+          <h2 class="technician-section-title">Partido</h2>
+        </div>
+        <div class="calendar-card" id="calendar-match"></div>
+        <div class="technician-events-panel">
+          <h3 class="technician-events-title">Eventos creados</h3>
+          <div id="technician-events-match" class="technician-events-list"></div>
+        </div>
+        <div class="event-form hidden" id="form-match">
+          <label class="event-form-label" for="time-partido">Hora</label>
+          <input id="time-partido" class="technician-input" type="time" />
+
+          <label class="event-form-label" for="location-match">Lugar</label>
+          <input id="location-match" class="technician-input" type="text" placeholder="Ej: Pabellón visitante" />
+
+          <label class="event-form-label" for="notes-match">Notas</label>
+          <textarea id="notes-match" class="technician-textarea" rows="3" placeholder="Añade detalles opcionales"></textarea>
+          <button class="btn-technician-section-save" type="button" data-save-type="match">Guardar</button>
+          <p id="error-match" class="technician-error hidden">Selecciona una fecha primero</p>
+        </div>
+      </section>
+
+      <section class="technician-section technician-section--friendly" data-type="Amistoso">
+        <div class="technician-section-header">
+          <h2 class="technician-section-title">Amistoso</h2>
+        </div>
+        <div class="calendar-card" id="calendar-friendly"></div>
+        <div class="technician-events-panel">
+          <h3 class="technician-events-title">Eventos creados</h3>
+          <div id="technician-events-friendly" class="technician-events-list"></div>
+        </div>
+        <div class="event-form hidden" id="form-friendly">
+          <label class="event-form-label" for="time-amistoso">Hora</label>
+          <input id="time-amistoso" class="technician-input" type="time" />
+
+          <label class="event-form-label" for="location-friendly">Lugar</label>
+          <input id="location-friendly" class="technician-input" type="text" placeholder="Ej: Instalación municipal" />
+
+          <label class="event-form-label" for="notes-friendly">Notas</label>
+          <textarea id="notes-friendly" class="technician-textarea" rows="3" placeholder="Añade detalles opcionales"></textarea>
+          <button class="btn-technician-section-save" type="button" data-save-type="friendly">Guardar</button>
+          <p id="error-friendly" class="technician-error hidden">Selecciona una fecha primero</p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- ── MODAL COMENTARIO ── -->
+  <div id="modal-overlay" class="modal-overlay hidden">
+    <div class="modal">
+      <h3 id="modal-title" class="modal-title"></h3>
+      <p class="modal-sub">Añade un comentario (opcional)</p>
+      <textarea id="modal-comment" class="modal-textarea" rows="3" placeholder="Ej: Llego 10 min tarde…"></textarea>
+      <div class="modal-actions">
+        <button id="modal-cancel" class="btn-secondary">Cancelar</button>
+        <button id="modal-confirm" class="btn-primary">Confirmar</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="modal-attendance" class="modal-overlay hidden">
+    <div class="modal" style="max-width:560px">
+      <h3 id="modal-attendance-title" class="modal-title"></h3>
+      <div id="modal-attendance-body">Cargando...</div>
+      <div class="modal-actions">
+        <button id="modal-attendance-close" class="btn-primary">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/technician.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/events.js"></script>
+  <script src="js/attendance.js"></script>
+</body>
+</html>
