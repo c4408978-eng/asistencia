@@ -1,0 +1,149 @@
+/* ── PANTALLAS ── */
+.screen-dashboard,
+#screen-technician,
+#screen-dashboard {
+  background: linear-gradient(to bottom, #0d47a1, #42a5f5);
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* ── DASHBOARD JUGADOR ── */
+.dashboard {
+  max-width: 640px;
+  margin: 24px auto 0;
+  padding: 24px 16px 48px;
+  background: var(--surface);
+  border-radius: 20px 20px 0 0;
+  box-shadow: 0 10px 30px rgba(13, 71, 161, 0.18);
+}
+
+.section-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  letter-spacing: .3px;
+}
+
+.status-msg {
+  color: var(--muted);
+  font-size: .9rem;
+  padding: 24px 0;
+  text-align: center;
+}
+
+/* ── EVENT CARDS ── */
+.events-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.event-card {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+  box-shadow: var(--shadow);
+  transition: transform .1s;
+}
+.event-card:hover { transform: translateY(-1px); }
+
+.event-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  margin-bottom: 10px;
+}
+
+.event-type-badge {
+  font-size: .9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .8px;
+  padding: 3px 9px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+.event-type-badge.entrenamiento { background: var(--green-light); color: var(--green-dark); }
+.event-type-badge.partido       { background: #fff3e0; color: #c65e00; }
+.event-type-badge.amistoso      { background: #f3e8ff; color: #7b3ff2; }
+.event-type-badge.otro          { background: #f0f0f0; color: #555; }
+
+.event-datetime {
+  font-size: .9rem;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.event-title-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 10px;
+}
+
+.event-convocatoria {
+  font-size: .9rem;
+  color: var(--muted);
+}
+
+.event-location {
+  font-size: .9rem;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.event-notes {
+  font-size: .85rem;
+  color: var(--text);
+  background: #fafafa;
+  border-left: 3px solid var(--green);
+  padding: 8px 12px;
+  border-radius: 0 6px 6px 0;
+  margin-bottom: 14px;
+  line-height: 1.5;
+}
+
+/* ── ATTENDANCE BUTTONS ── */
+.attendance-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.btn-attend {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1.5px solid transparent;
+  font-family: inherit;
+  font-size: .88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .15s;
+}
+.btn-attend.yes { background: var(--green-light); color: var(--green-dark); border-color: var(--green); }
+.btn-attend.yes:hover, .btn-attend.yes.active { background: var(--green); color: #fff; }
+.btn-attend.no  { background: var(--red-light); color: var(--red); border-color: var(--red); }
+.btn-attend.no:hover, .btn-attend.no.active  { background: var(--red); color: #fff; }
+
+.attendance-comment {
+  margin-top: 8px;
+  font-size: .8rem;
+  color: var(--muted);
+  font-style: italic;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 420px) {
+  .login-wrap { padding: 0; }
+  .dashboard {
+    margin-top: 16px;
+    padding: 16px 12px 40px;
+    border-radius: 18px 18px 0 0;
+  }
+}

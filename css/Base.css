@@ -1,0 +1,136 @@
+/* ── TOKENS ── */
+:root {
+  --green:      #1a9e5c;
+  --green-dark: #137a46;
+  --green-light:#e6f7ef;
+  --red:        #e03e3e;
+  --red-light:  #fdeaea;
+  --yellow:     #f5a623;
+  --bg:         #f0f2f5;
+  --surface:    #ffffff;
+  --border:     #e2e6ea;
+  --text:       #1a1d23;
+  --muted:      #6b7280;
+  --radius:     12px;
+  --shadow:     0 2px 12px rgba(0,0,0,.08);
+}
+
+/* ── RESET ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+body:has(#screen-dashboard.active),
+body:has(#screen-dashboard:not(.hidden)),
+body:has(#screen-technician.active),
+body:has(#screen-technician:not(.hidden)) {
+  background: linear-gradient(to bottom, #0d47a1, #42a5f5);
+}
+
+/* ── SCREENS ── */
+.screen { display: none; }
+.screen.active, .screen:not(.hidden) { display: block; }
+.hidden { display: none !important; }
+
+/* ── FORMS GENERALES ── */
+select, textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  font-family: inherit;
+  font-size: 1rem;
+  color: var(--text);
+  background: var(--surface);
+  transition: border-color .15s;
+  outline: none;
+}
+select:focus, textarea:focus { border-color: var(--green); }
+
+/* ── BUTTONS GENERALES ── */
+.btn-primary {
+  padding: 13px 20px;
+  background: var(--green);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .15s, transform .1s;
+  width: 100%;
+}
+.btn-primary:hover  { background: var(--green-dark); }
+.btn-primary:active { transform: scale(.98); }
+.btn-primary:disabled { opacity: .6; cursor: not-allowed; }
+
+.btn-secondary {
+  padding: 13px 20px;
+  background: transparent;
+  color: var(--text);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .15s;
+  flex: 1;
+}
+.btn-secondary:hover { background: var(--bg); }
+
+/* ── ERROR GENERAL ── */
+.error-msg {
+  color: var(--red);
+  font-size: .85rem;
+  text-align: center;
+  background: var(--red-light);
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+
+/* ── TOP BAR ── */
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background: rgba(13, 71, 161, 0.92);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  color: #ffffff;
+}
+
+.header-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: .3px;
+  color: #ffffff;
+}
+.header-name::before { content: '⚽ '; }
+
+.btn-logout {
+  padding: 6px 14px;
+  border: 1.5px solid rgba(255, 255, 255, 0.45);
+  border-radius: 8px;
+  background: transparent;
+  font-family: inherit;
+  font-size: .85rem;
+  font-weight: 500;
+  color: #ffffff;
+  cursor: pointer;
+  transition: color .15s, border-color .15s, background .15s;
+}
+.btn-logout:hover {
+  color: #ffffff;
+  border-color: #ffffff;
+  background: rgba(255, 255, 255, 0.12);
+}
