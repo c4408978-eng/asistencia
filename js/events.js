@@ -27,14 +27,16 @@ async function loadEvents() {
       return;
     }
 
-    // Cabecera: ID | Tipo | Fecha | Hora | Lugar | Notas
+    // Cabecera: ID | Tipo | Fecha | Hora | Local/Visitante | Hora convocatoria | Notas
     const events = evData.values.slice(1).map(row => ({
       id:       row[0] || '',
       type:     row[1] || 'Otro',
       date:     row[2] || '',
       time:     row[3] || '',
       location: row[4] || '',
-      notes:    row[5] || '',
+      convocatoria: row[5] || '',
+      notes:        row[6] || '',
+      editado:     row[7] || '',
     })).filter(e => e.id && isFutureOrToday(e.date));
 
     window._events = events;
@@ -107,9 +109,11 @@ function renderEventCard(event, existing) {
   card.innerHTML = `
     <div class="event-header">
       <span class="event-type-badge ${typeClass}">${event.type}</span>
+      ${event.editado === 'SI' ? '<span class="event-edited-badge">EDITADO</span>' : ''}
       <span class="event-datetime">${dateStr}${timeStr}</span>
-    </div>
-    <div class="event-title-row">
+      ${event.convocatoria
+        ? `<div class="event-convocatoria">🕐 Convocatoria: ${event.convocatoria}</div>`
+        : ''}
       ${event.location
         ? `<span class="event-location">📍 ${event.location}</span>`
         : ''}
