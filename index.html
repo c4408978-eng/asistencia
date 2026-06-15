@@ -6,7 +6,10 @@
   <title>Confirmación de Asistencia</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/login.css" />
+  <link rel="stylesheet" href="css/dashboard.css" />
+  <link rel="stylesheet" href="css/technician.css" />
 </head>
 <body>
 
@@ -28,7 +31,7 @@
     </div>
   </div>
 
-  <!-- ── DASHBOARD ── -->
+  <!-- ── DASHBOARD JUGADOR ── -->
   <div id="screen-dashboard" class="screen hidden">
 
     <header class="top-bar">
@@ -53,6 +56,8 @@
     </header>
 
     <main class="technician-dashboard">
+
+      <!-- ENTRENAMIENTO -->
       <section class="technician-section technician-section--training" data-type="Entrenamiento">
         <div class="technician-section-header">
           <h2 class="technician-section-title">Entrenamiento</h2>
@@ -66,8 +71,14 @@
           <label class="event-form-label" for="time-entrenamiento">Hora</label>
           <input id="time-entrenamiento" class="technician-input" type="time" />
 
-          <label class="event-form-label" for="location-training">Lugar</label>
-          <input id="location-training" class="technician-input" type="text" placeholder="Ej: Campo principal" />
+          <label class="event-form-label" for="location-training">Local / Visitante</label>
+          <select id="location-training" class="technician-input">
+            <option value="LOCAL">LOCAL</option>
+            <option value="VISITANTE">VISITANTE</option>
+          </select>
+
+          <label class="event-form-label" for="convocatoria-training">Hora convocatoria</label>
+          <input id="convocatoria-training" class="technician-input" type="text" disabled placeholder="—" />
 
           <label class="event-form-label" for="notes-training">Notas</label>
           <textarea id="notes-training" class="technician-textarea" rows="3" placeholder="Añade detalles opcionales"></textarea>
@@ -76,6 +87,7 @@
         </div>
       </section>
 
+      <!-- PARTIDO -->
       <section class="technician-section technician-section--match" data-type="Partido">
         <div class="technician-section-header">
           <h2 class="technician-section-title">Partido</h2>
@@ -89,8 +101,14 @@
           <label class="event-form-label" for="time-partido">Hora</label>
           <input id="time-partido" class="technician-input" type="time" />
 
-          <label class="event-form-label" for="location-match">Lugar</label>
-          <input id="location-match" class="technician-input" type="text" placeholder="Ej: Pabellón visitante" />
+          <label class="event-form-label" for="location-match">Local / Visitante</label>
+          <select id="location-match" class="technician-input">
+            <option value="LOCAL">LOCAL</option>
+            <option value="VISITANTE">VISITANTE</option>
+          </select>
+
+          <label class="event-form-label" for="convocatoria-match">Hora convocatoria</label>
+          <input id="convocatoria-match" class="technician-input" type="text" disabled placeholder="—" />
 
           <label class="event-form-label" for="notes-match">Notas</label>
           <textarea id="notes-match" class="technician-textarea" rows="3" placeholder="Añade detalles opcionales"></textarea>
@@ -99,6 +117,7 @@
         </div>
       </section>
 
+      <!-- AMISTOSO -->
       <section class="technician-section technician-section--friendly" data-type="Amistoso">
         <div class="technician-section-header">
           <h2 class="technician-section-title">Amistoso</h2>
@@ -112,8 +131,14 @@
           <label class="event-form-label" for="time-amistoso">Hora</label>
           <input id="time-amistoso" class="technician-input" type="time" />
 
-          <label class="event-form-label" for="location-friendly">Lugar</label>
-          <input id="location-friendly" class="technician-input" type="text" placeholder="Ej: Instalación municipal" />
+          <label class="event-form-label" for="location-friendly">Local / Visitante</label>
+          <select id="location-friendly" class="technician-input">
+            <option value="LOCAL">LOCAL</option>
+            <option value="VISITANTE">VISITANTE</option>
+          </select>
+
+          <label class="event-form-label" for="convocatoria-friendly">Hora convocatoria</label>
+          <input id="convocatoria-friendly" class="technician-input" type="text" disabled placeholder="—" />
 
           <label class="event-form-label" for="notes-friendly">Notas</label>
           <textarea id="notes-friendly" class="technician-textarea" rows="3" placeholder="Añade detalles opcionales"></textarea>
@@ -121,10 +146,11 @@
           <p id="error-friendly" class="technician-error hidden">Selecciona una fecha primero</p>
         </div>
       </section>
+
     </main>
   </div>
 
-  <!-- ── MODAL COMENTARIO ── -->
+  <!-- ── MODAL COMENTARIO JUGADOR ── -->
   <div id="modal-overlay" class="modal-overlay hidden">
     <div class="modal">
       <h3 id="modal-title" class="modal-title"></h3>
@@ -137,6 +163,7 @@
     </div>
   </div>
 
+  <!-- ── MODAL ASISTENCIA TÉCNICO ── -->
   <div id="modal-attendance" class="modal-overlay hidden">
     <div class="modal" style="max-width:560px">
       <h3 id="modal-attendance-title" class="modal-title"></h3>
@@ -147,8 +174,34 @@
     </div>
   </div>
 
+  <div id="modal-edit-event" class="modal-overlay hidden">
+    <div class="modal" style="max-width:520px">
+      <h3 id="modal-edit-title" class="modal-title"></h3>
+      <label class="event-form-label">Fecha</label>
+      <input id="edit-fecha" class="technician-input" type="date" />
+      <label class="event-form-label">Hora</label>
+      <input id="edit-hora" class="technician-input" type="time" />
+      <label class="event-form-label">Local / Visitante</label>
+      <select id="edit-location" class="technician-input">
+        <option value="LOCAL">LOCAL</option>
+        <option value="VISITANTE">VISITANTE</option>
+      </select>
+      <label class="event-form-label">Hora convocatoria</label>
+      <input id="edit-convocatoria" class="technician-input" type="text" disabled placeholder="—" />
+      <label class="event-form-label">Notas</label>
+      <textarea id="edit-notas" class="technician-textarea" rows="3"></textarea>
+      <div class="modal-actions">
+        <button id="modal-edit-delete" class="btn-delete">Eliminar</button>
+        <button id="modal-edit-cancel" class="btn-secondary">Cancelar</button>
+        <button id="modal-edit-save" class="btn-primary">Guardar</button>
+      </div>
+    </div>
+  </div>
+
   <script src="js/config.js"></script>
-  <script src="js/technician.js"></script>
+  <script src="js/technician-calendar.js"></script>
+  <script src="js/technician-attendance.js"></script>
+  <script src="js/technician-edit.js"></script>
   <script src="js/auth.js"></script>
   <script src="js/events.js"></script>
   <script src="js/attendance.js"></script>
